@@ -1,3 +1,0 @@
-Hello Graders,
-
-I regret to inform that I did not have time to create a main.py file with all of the code during this project. However, all of my code can be found on the jupyter notebook, which I have included in this submission. Run 'jupyter notebook' in your environment and it should pop up. Each cell contains a section of the project, as well as the documentation + code needed to run it. The exception is Part 2.2: Hybrid images. The code for that lives in a subdirectory called hybrid_images. My code is contained within the starter file: hybrid_image_starter.py.

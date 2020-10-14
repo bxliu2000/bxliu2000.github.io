@@ -3,184 +3,52 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="simple.css">
-    <title>Project Two</title>
+    <title>Project Three</title>
     <meta name="Brian Liu" content="SitePoint">
 </head>
 
 <body>
-    <h1>Fun with Filters & Frequencies</h1>
-    <h2>Part 1.1: Finite Difference Operator</h2>
-            <img src="./cameraman.png" width="300" height="300">
-            <p> 
-                Discretized partial derivatives can simply be though of as subtracting the pixel value of our adjacent cell with our current cell. When the difference between pixel values is large, we can approximate an "edge" in the image. Depending on whether we do this in the x or y direction, we obtain two different directions of possible edges in the image. 
-                </div>
-
-                Shown below is the partials in the x and y direction. 
-            </p>
-            <img src="./results/pt1_edge_x.jpg" width="300" height="300">
-            <img src="./results/pt1_edge_y.jpg" width="300" height="300">
-
-            <p>
-                To make this a binary image, we set the threshold to be greater than 0.1 or less than 0.1. This was a threshold determined by experimentation, and it basically means that two adjacent pixels must have a difference greater than abs(0.1) in order for us to count it as an edge in our image. 
-            </p>
-
-
-    <h2>Part 1.2: Derivative of Gaussian (DoG) Filter</h2>
-        <p>
-            In our previous approach, we saw that our pictures were still noisy, mostly due to the fact that our approach in thresholding the image did not adequately suppress noise. Now we introduce a gaussian filter to blur the image before we apply our previous finite difference operators. Since convolutions are communative, I simply convolved my gaussian with my derivative in the x and y directions for the final edge image:
-        </p>
-        <img src="./results/pt2_edge_x.jpg" width="300" height="300">
-        +
-        <img src="./results/pt2_edge_y.jpg" width="300" height="300">
-        =
-        <img src="./results/pt2_edgecombo.jpg" width="300" height="300">
-
-        <p>
-            The main differences that I see are the lack of extra noise around the grass. This is because the image was "smoothed" by the gaussian, so it essentially smoothed over those small edges. 
-        </p>
-    <h2>Part 1.3: Image Straighetning</h2>
-        <p>
-            We want to automatically straighten an image by iterating through a number of possible rotations for an image and picking one where there are maximum number of horizontal and vertical edges.
-
-            We can calculate the angle of an edge by convolving our image with our derivative in the x and y directions, then taking the deg = arctan(y/x) of our convolved images. We've grouped all the angles of interest into histogram bins. 
-        </p>
-        
-        <h3>Facade</h3>
-        <img src="facade.jpg" width="400" height="300">
-        =>
-        <img src="results/pt3_facade.jpg" width="400" height="300">
-        <img src="results/hist_facade.png">
-        <h3>Pillars</h3>
-        <img src="pillars.jpg" width="400" height="300">
-        =>
-        <img src="results/pt3_pillars.jpg" width="400" height="300">
-        <img src="results/hist_pilllars.png">
-        <h3>Minecraft</h3>
-        <img src="minecraft.jpg" width="400" height="300">
-        =>
-        <img src="results/pt3_minecraft.jpg" width="400" height="300">
-        <img src="results/hist_minecraft.png">
-        <p>
-            The edges in this minecraft image are not necessarily directlly horizontal or vertical, given the perspective of the camera. However, the algorithm still does a great job of aligning the image with respect to the vertical/horizontal edges that are given. 
-        </p>
-        <h3>Mountains (failure)</h3>
-        <img src="mountains.png" width="400" height="300">
-        =>
-        <img src="results/pt3_mountains.jpg" width="400" height="300">
-        <img src="results/hist_mountains.png">
-        <p>
-            The failure case arises from ther ebeing a lack of horizontal/vertical edges in an image. 
-        </p>
-        <p>
-            The bins of the histogram are placed at +-180, +-90, and 0. The uncertainty value (width) of these bins are about 5 degrees. All angles of the image that are not characterized as right angles are collectively placed into a bin between these bins. Hence, that is why their peaks are so much higher. 
-        </p>
-    <h2>Part 2.1: Image Sharpening</h2>
-        <p>
-            To sharpen an image artificially, we can convolve our image with a gaussian to filter out the high frequencies, then subtract our original image from our filtered image. To do this in a single convolution, we can use a new filter calculated by: (1 + a) * unit_impulse - a * gaussian.   
-        </p>
-        <h3>The Taj</h3>
-        <img src="taj.jpg">
-        <img src="results/pt4_taj.jpg">
-        <h3>Bird</h3>
-        <img src="bird.jpg" width="400">
-        <img src="results/blurred_bird2.jpg" width="400">
-        <img src="results/pt4_shap_blur_bird2.jpg" width="400">
-        <h3>A Second Bird</h3>
-        <img src="bird2.jpg" width="400">
-        <img src="results/blurred_bird.jpg" width="400">
-        <img src="results/sharp_blur_bird.jpg" width="400">
-        <p>
-            Although our artificial sharpening trick may appear to work, all it is really doing is making existing high frequencies even higher. We don't introduce any new information to our image. Thus, if we make an existing image blurry, we've essentially taken out all the "useful information" about our image, and thus will be unable to restore it with our techniique. 
-        </p>
-    <h2>Part 2.2: Hybrid Images</h2>
-        <h3>Cat + Person</h3>
-        <img src="hybrid_python/DerekPicture.jpg" height="400">
-        <img src="hybrid_python/nutmeg.jpg" height="400">
-        <img src="results/pt_5_cat_person.jpg" height="400">
-        <h3>Fourier Analysis for Cat + Person</h3>
-        <p>Cat's original photo -> Cat's high-passed photo.</p>
-        <img src="results/cat_before.png" height="400">
-        <img src="results/cat_high.png" height="400">
-        <p>Derek's original photo -> Derek's low-passed photo.</p>
-        <img src="results/derek_before.png" height="400">
-        <img src="results/derek_low.png" height="400">
-        <p>Their Fourier Domains added together. We expect to see that the high-frequencies of the cat directly be added onto Derek's low-passed frequencies.</p>
-        <img src="results/hybrid.png" height="400">
-        <h3>Hilfinger + Sahai</h3>
-        <img src="hybrid_python/sahai.jpg" height="400">
-        <img src="hybrid_python/hilfinger.jpg" height="400">
-        <img src="results/pt5_hilf_sahai.jpg" height="400">
-        <h3>Trump + Biden</h3>
-        <img src="hybrid_python/biden.jpg" width="400">
-        <img src="hybrid_python/trump.jpg" width="400">
-        <img src="results/trump_biden.jpg" width="400">
-        <p>
-            Although the Trump + Biden mix may look well at first, but the low-pass filter has gone through and removed many of Trump's key features. As you may see below during our gaussian stack, it becomes difficult to discern between his features and joe's. Thus, I picked this image as the "failure" case. The cutoff frequency for this exercise was determined by sigma, the (standard deviation) term passed into creating a gaussian kernel. I found that the sigma passed in was inversely proportional to the cutoff frequency, that is the higher my sigma, the lower cut-off frequency was the the low-pass filter. I tinkered around with these tricks, as well as the size of the gaussian kernel itself to obtain the results which I have displayed. The larger the gaussian kernel, the lower the cutoff frequency is as well. 
-        </p>
-    <h2>Part 2.3: Gaussian and Laplacian Stacks</h2>
-        <h3>Gaussian Stack on Lincoln</h3>
-        <img src="results/stack/g_stck 0.jpg" height="300">
-        <img src="results/stack/g_stck 1.jpg" height="300">
-        <img src="results/stack/g_stck 2.jpg" height="300">
-        <img src="results/stack/g_stck 3.jpg" height="300">
-        <img src="results/stack/g_stck 4.jpg" height="300">
-        <img src="results/stack/g_stck 5.jpg" height="300">
-        <h3>Laplacian Stack on Lincoln</h3>
-        <img src="results/stack/l_stck 0.jpg" height="300">
-        <img src="results/stack/l_stck 1.jpg" height="300">
-        <img src="results/stack/l_stck 2.jpg" height="300">
-        <img src="results/stack/l_stck 3.jpg" height="300">
-        <img src="results/stack/l_stck 4.jpg" height="300">
-        <h3>Gaussian Stack on Trump/Biden Hybrid</h3>
-        <img src="results/stack2/g_stck 0.jpg" width="250">
-        <img src="results/stack2/g_stck 1.jpg" width="250">
-        <img src="results/stack2/g_stck 2.jpg" width="250">
-        <img src="results/stack2/g_stck 3.jpg" width="250">
-        <img src="results/stack2/g_stck 4.jpg" width="250">
-        <img src="results/stack2/g_stck 5.jpg" width="250">
-        <h3>Laplacian Stack on Trump/Biden Hybrid</h3>
-        <img src="results/stack2/l_stck 0.jpg" width="250">
-        <img src="results/stack2/l_stck 1.jpg" width="250">
-        <img src="results/stack2/l_stck 2.jpg" width="250">
-        <img src="results/stack2/l_stck 3.jpg" width="250">
-        <img src="results/stack2/l_stck 4.jpg" width="250">
-    <h2>Part 2.4: Multiresolution Blending</h2>
-        <h3>Apple + Orange (Bells & Whistles with Color!)</h3>
-        <img src="mask.jpg">
-        <img src="apple.jpeg">
-        <img src="orange.jpeg">
-        <img src="results/blendresult.jpg">
-        <h3>Hand + Eye</h3>
-        <img src="mask2.png">
-        <img src="hand.png">
-        <img src="eye.jpg">
-        <img src="results/hand_eye.jpg">
-        <h3>My Band Photo + The milky way</h3>
-        <img src="jazz_mask.jpg" width="350">
-        <img src="jazz.jpeg" width="350">
-        <img src="milky.jpg" width="350">
-        <img src="results/pinkbrian.jpg" width="350">
-        <h3>The laplacian stack of this blend.</h3>
-        <h4>L1</h4>
-        <img src="results/stack4/l0.jpg" width="450">
-        <img src="results/stack5/r0.jpg" width="450">
-        <img src="results/stack3/stack3_0.jpg" width="450">
-        <h4>L2 (This level is the best result)</h4>
-        <img src="results/stack4/l1.jpg" width="450">
-        <img src="results/stack5/r1.jpg" width="450">
-        <img src="results/stack3/stack3_1.jpg" width="450">
-        <h4>L3</h4>
-        <img src="results/stack4/l2.jpg" width="450">
-        <img src="results/stack5/r2.jpg" width="450">
-        <img src="results/stack3/stack3_2.jpg" width="450">
-        <h4>L4</h4>
-        <img src="results/stack4/l3.jpg" width="450">
-        <img src="results/stack5/r3.jpg" width="450">
-        <img src="results/stack3/stack3_3.jpg" width="450">
-        <h4>L5</h4>
-        <img src="results/stack4/l4.jpg" width="450">
-        <img src="results/stack5/r4.jpg" width="450">
-        <img src="results/stack3/stack3_4.jpg" width="450">
-
+    <h1>Morphing Faces!</h1>
+        <h2>Midway Face</h2>
+            <p>From left to right: My face, Tiger's face, our midway photo.</p>
+            <img src="./face_1.jpg" width="300" height="300">
+            <img src="./tiger.jpg" width="300" height="300">
+            <img src="./frame_20.jpg" width="300" height="300">
+            <p>The midway sequence for this particular morph did not turn out too natural as you can see some fading effect in the background. This was mainly because I placed points at the corner of the image to morph the background as well. A better result can be seen between me and george cloony. I cut out parts of the background for this. There's some funny business between eyebrows, but that is because I didn't properly label points along the eyebrows.</p>
+            <img src="./face_1.jpg" width="300" height="300">
+            <img src="./cloony.jpg" width="300" height="300">
+            <img src="./results/midway_face.jpg" width="450" height="300">
+        <h2>The Morph Sequence</h2>
+            <img src="./results/brian-tiger.jpg" width="300" height="300">
+            <img src="./results/brian-ethan.jpg" width="300" height="300">
+            <p>All in all, I think the tiger one turned out pretty well. Depending on where you look, the effect seems pretty natural or very fake. E.g. If you look between tiger's eyes, then the effect is really natural. However, if you look at the top of the head, there is some fading effect that makes it seem a bit faker. These two gifs also demonstrate the difference in quality you get from the number of points you select. I selected about 60 points for the tiger transformation, and around 20 points for the transformation with my brother.</p>
+        <h2>The Mean Population </h2>
+            <p>From left to right: My face, Average face of all Danish Computer Scientists, Average shape warped into my face shape, My shape warped into the average shape.</p>
+            <img src="./face_1.jpg" width="300" height="300">
+            <img src="./results/mean_dane.jpg" width="400" height="300">
+            <img src="./results/mean_brian_shape.jpg" width="400" height="300">
+            <img src="./results/brian_mean_shape.jpg" width="400" height="300">
+            <p>I was pretty surprised at how this turned out - but I have a feeling it was because the labels for my points were not so precise... this can be seen in the way both transformation have deformed nostrils and chins. Thankfully, this isn't the only transformation on average population I've computed, as you will see below when I compute female/male versions of myself. 
+        <h2>Caricature </h2>
+            <img src="./results/average_male.jpg" width="300" height="300">
+            <img src="./results/brian_caricature.jpg" width="400" height="300">
+            <p>Caricature turned out very well! As you can see my eye bags and lips are overly defined ande xaggerated. So is my chin.</p>
+        <h2>Female Version of Brian</h2>
+            <p>From left to right: Average female, my face warped into female shape, my face with female appearance, my face with both shape and appearance transformations. </p>
+            <img src="./results/average_female.jpg" width="300" height="300">
+            <img src="./results/brian_female_shape.jpg" width="400" height="300">
+            <img src="./results/feminine_brian_appearance.jpg" width="400" height="300">
+            <img src="./results/feminine_brian.jpg" width="400" height="300">
+                <p>For the life of me, I couldn't get the appearnces to align directly. Therefore, there is some smudging and overlap when mapping the female appearance onto myself. I believe this is because the labelled points for my lips were a bit lower than the actual dataset. But since there were 189 data points for this set, it was unlikely I could change my labelling. All in all, the final results are pretty good. The effect is best around the eyes.</p>
+            <h3> Cool! Difference in avg_female - avg_male vector. </h3>
+            <img src="./results/diff_fem_man.jpg" width="500" height="400">
+            <p>Something interesting I discovered was when I subtracted the male average by the female average. The result were the feature differences ie, the features that separate a man from woman! This was the image I would add on top of my own image to get the apperance seen above.</p>
+        <h2>Manlier Version of Brian</h2>
+            <p>From left to right: Average male, my face warped into male shape, my face with male appearance, my face with both shape and appearance transformations. </p>
+            <img src="./results/average_male.jpg" width="300" height="300">
+            <img src="./results/manly.jpg" width="400" height="300">
+            <img src="./results/manlier_brian_appearance.jpg" width="400" height="300">
+            <img src="./results/manlyman.jpg" width="400" height="300">
+            <p>I also made myself much more manly. I find it fairly hilarious that I look more and more cave-man like as I go haha.</p>
 </body>
 </html>
