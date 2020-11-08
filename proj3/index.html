@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="simple.css">
+    <title>Project Three</title>
+    <meta name="Brian Liu" content="SitePoint">
+</head>
+
+<body>
+    <h1>Morphing Faces!</h1>
+        <h2>Midway Face</h2>
+            <p>From left to right: My face, Tiger's face, our midway photo.</p>
+            <img src="./face_1.jpg" width="300" height="300">
+            <img src="./tiger.jpg" width="300" height="300">
+            <img src="./frame_20.jpg" width="300" height="300">
+            <p>The midway sequence for this particular morph did not turn out too natural as you can see some fading effect in the background. This was mainly because I placed points at the corner of the image to morph the background as well. A better result can be seen between me and george cloony. I cut out parts of the background for this. There's some funny business between eyebrows, but that is because I didn't properly label points along the eyebrows.</p>
+            <img src="./face_1.jpg" width="300" height="300">
+            <img src="./cloony.jpg" width="300" height="300">
+            <img src="./results/midway_face.jpg" width="450" height="300">
+        <h2>The Morph Sequence</h2>
+            <img src="./results/brian-tiger.gif" width="300" height="300">
+            <img src="./results/brian-ethan.gif" width="300" height="300">
+            <p>All in all, I think the tiger one turned out pretty well. Depending on where you look, the effect seems pretty natural or very fake. E.g. If you look between tiger's eyes, then the effect is really natural. However, if you look at the top of the head, there is some fading effect that makes it seem a bit faker. These two gifs also demonstrate the difference in quality you get from the number of points you select. I selected about 60 points for the tiger transformation, and around 20 points for the transformation with my brother.</p>
+        <h2>The Mean Population </h2>
+            <p>From left to right: My face, Average face of all Danish Computer Scientists, Average shape warped into my face shape, My shape warped into the average shape.</p>
+            <img src="./face_1.jpg" width="300" height="300">
+            <img src="./results/mean_dane.jpg" width="400" height="300">
+            <img src="./results/mean_brian_shape.jpg" width="400" height="300">
+            <img src="./results/brian_mean_shape.jpg" width="400" height="300">
+            <p>I was pretty surprised at how this turned out - but I have a feeling it was because the labels for my points were not so precise... this can be seen in the way both transformation have deformed nostrils and chins. Thankfully, this isn't the only transformation on average population I've computed, as you will see below when I compute female/male versions of myself. 
+        <h2>Caricature </h2>
+            <img src="./results/average_male.jpg" width="300" height="300">
+            <img src="./results/brian_caricature.jpg" width="400" height="300">
+            <p>Caricature turned out very well! As you can see my eye bags and lips are overly defined ande xaggerated. So is my chin.</p>
+        <h2>Female Version of Brian</h2>
+            <p>From left to right: Average female, my face warped into female shape, my face with female appearance, my face with both shape and appearance transformations. </p>
+            <img src="./results/average_female.jpg" width="300" height="300">
+            <img src="./results/brian_female_shape.jpg" width="400" height="300">
+            <img src="./results/feminine_brian_appearance.jpg" width="400" height="300">
+            <img src="./results/feminine_brian.jpg" width="400" height="300">
+                <p>For the life of me, I couldn't get the appearnces to align directly. Therefore, there is some smudging and overlap when mapping the female appearance onto myself. I believe this is because the labelled points for my lips were a bit lower than the actual dataset. But since there were 189 data points for this set, it was unlikely I could change my labelling. All in all, the final results are pretty good. The effect is best around the eyes.</p>
+            <h3> Cool! Difference in avg_female - avg_male vector. </h3>
+            <img src="./results/diff_fem_man.jpg" width="500" height="400">
+            <p>Something interesting I discovered was when I subtracted the male average by the female average. The result were the feature differences ie, the features that separate a man from woman! This was the image I would add on top of my own image to get the apperance seen above.</p>
+        <h2>Manlier Version of Brian</h2>
+            <p>From left to right: Average male, my face warped into male shape, my face with male appearance, my face with both shape and appearance transformations. </p>
+            <img src="./results/average_male.jpg" width="300" height="300">
+            <img src="./results/manly.jpg" width="400" height="300">
+            <img src="./results/manlier_brian_appearance.jpg" width="400" height="300">
+            <img src="./results/manlyman.jpg" width="400" height="300">
+            <p>I also made myself much more manly. I find it fairly hilarious that I look more and more cave-man like as I go haha.</p>
+</body>
+</html>

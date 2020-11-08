@@ -3,52 +3,62 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="simple.css">
-    <title>Project Three</title>
+    <title>Project Four</title>
     <meta name="Brian Liu" content="SitePoint">
 </head>
 
 <body>
-    <h1>Morphing Faces!</h1>
-        <h2>Midway Face</h2>
-            <p>From left to right: My face, Tiger's face, our midway photo.</p>
-            <img src="./face_1.jpg" width="300" height="300">
-            <img src="./tiger.jpg" width="300" height="300">
-            <img src="./frame_20.jpg" width="300" height="300">
-            <p>The midway sequence for this particular morph did not turn out too natural as you can see some fading effect in the background. This was mainly because I placed points at the corner of the image to morph the background as well. A better result can be seen between me and george cloony. I cut out parts of the background for this. There's some funny business between eyebrows, but that is because I didn't properly label points along the eyebrows.</p>
-            <img src="./face_1.jpg" width="300" height="300">
-            <img src="./cloony.jpg" width="300" height="300">
-            <img src="./results/midway_face.jpg" width="450" height="300">
-        <h2>The Morph Sequence</h2>
-            <img src="./results/brian-tiger.gif" width="300" height="300">
-            <img src="./results/brian-ethan.gif" width="300" height="300">
-            <p>All in all, I think the tiger one turned out pretty well. Depending on where you look, the effect seems pretty natural or very fake. E.g. If you look between tiger's eyes, then the effect is really natural. However, if you look at the top of the head, there is some fading effect that makes it seem a bit faker. These two gifs also demonstrate the difference in quality you get from the number of points you select. I selected about 60 points for the tiger transformation, and around 20 points for the transformation with my brother.</p>
-        <h2>The Mean Population </h2>
-            <p>From left to right: My face, Average face of all Danish Computer Scientists, Average shape warped into my face shape, My shape warped into the average shape.</p>
-            <img src="./face_1.jpg" width="300" height="300">
-            <img src="./results/mean_dane.jpg" width="400" height="300">
-            <img src="./results/mean_brian_shape.jpg" width="400" height="300">
-            <img src="./results/brian_mean_shape.jpg" width="400" height="300">
-            <p>I was pretty surprised at how this turned out - but I have a feeling it was because the labels for my points were not so precise... this can be seen in the way both transformation have deformed nostrils and chins. Thankfully, this isn't the only transformation on average population I've computed, as you will see below when I compute female/male versions of myself. 
-        <h2>Caricature </h2>
-            <img src="./results/average_male.jpg" width="300" height="300">
-            <img src="./results/brian_caricature.jpg" width="400" height="300">
-            <p>Caricature turned out very well! As you can see my eye bags and lips are overly defined ande xaggerated. So is my chin.</p>
-        <h2>Female Version of Brian</h2>
-            <p>From left to right: Average female, my face warped into female shape, my face with female appearance, my face with both shape and appearance transformations. </p>
-            <img src="./results/average_female.jpg" width="300" height="300">
-            <img src="./results/brian_female_shape.jpg" width="400" height="300">
-            <img src="./results/feminine_brian_appearance.jpg" width="400" height="300">
-            <img src="./results/feminine_brian.jpg" width="400" height="300">
-                <p>For the life of me, I couldn't get the appearnces to align directly. Therefore, there is some smudging and overlap when mapping the female appearance onto myself. I believe this is because the labelled points for my lips were a bit lower than the actual dataset. But since there were 189 data points for this set, it was unlikely I could change my labelling. All in all, the final results are pretty good. The effect is best around the eyes.</p>
-            <h3> Cool! Difference in avg_female - avg_male vector. </h3>
-            <img src="./results/diff_fem_man.jpg" width="500" height="400">
-            <p>Something interesting I discovered was when I subtracted the male average by the female average. The result were the feature differences ie, the features that separate a man from woman! This was the image I would add on top of my own image to get the apperance seen above.</p>
-        <h2>Manlier Version of Brian</h2>
-            <p>From left to right: Average male, my face warped into male shape, my face with male appearance, my face with both shape and appearance transformations. </p>
-            <img src="./results/average_male.jpg" width="300" height="300">
-            <img src="./results/manly.jpg" width="400" height="300">
-            <img src="./results/manlier_brian_appearance.jpg" width="400" height="300">
-            <img src="./results/manlyman.jpg" width="400" height="300">
-            <p>I also made myself much more manly. I find it fairly hilarious that I look more and more cave-man like as I go haha.</p>
+    <h1>Fun with neural networks!</h1>
+        <h2>Part 1: Nose Detection</h2>
+            <h3>Sample Images from Dataloader</h3>
+                <img src="./results/pt_1/pt1_dataloader.png">
+            <h3>Training and Validation Accuracy </h3>
+                <p>Plotted below are the training and validation accuracy trend lines for a total of 25 epochs. Blue is the training loss & orange is the loss on testing data. </p>
+                <img src="./results/pt_1/epoch_loss_decrease.png" height="400" width="500">
+            <h3>Examples of successes!</h3>
+                <img src="./results/pt_1/prediction_30_25.png" height="300" width="400">
+                <img src="./results/pt_1/prediction_11_25.png" height="300" width="400">
+                <img src="./results/pt_1/prediction_15_25.png" height="300" width="400">
+                <img src="./results/pt_1/prediction_16_25.png" height="300" width="400">
+                <img src="./results/pt_1/prediction_34_25.png" height="300" width="400">
+                <img src="./results/pt_1/prediction_35_25.png" height="300" width="400">
+            <h3>Examples of failures!</h3>
+                <img src="./results/pt_1/prediction_23_25.png" height="300" width="400">
+                <img src="./results/pt_1/prediction_31_25.png" height="300" width="400">
+                <img src="./results/pt_1/prediction_36_25.png" height="300" width="400">
+            <h4>Why failure?</h4>
+            <p>If we take a closer look at the failure photos, we can see that our prediction is detecting a point where the pattern at that position resembles that of a nose. For example with the woman, the dimples in her smile create a similar pattern to that of a nose, and the last man's eyebags also has a similar pattern to that of a nose as well. Thus I believe that the filter in the first layer which is trained to recognize the pixel composition of a nose is mistaking these other features on the face for that of a nose. </p>
+        <h2>Part 2: Detecting the rest of the faces</h2>
+            <h3>Sample Images from Dataloader</h3>
+                <p>For Data Augmentation, I incorporated random changes in brightness, saturation, randomly cropping my image within a specified window, and randomly rotating it from -15 to 15 degrees. Below are some examples.</p>
+                <img src="./results/pt_2/pt_2_dataloader.png">
+            <h3>My Neural Architecture</h3>
+                <p>For task two I actually forewent the advice and stayed with 4 thicc convolutional layers instead of 5-6. After tons of experimentation, I got far better results with 4 layers and I hypothesizoe it is because my image size is still relatively small. I chose to pass in image sizes of 160x120. </p>
+                <p>Convolutional layer1: I had a 20 channel 5x5 convolutional layer followed by a relu and a maxpool.</p>
+                <p>Convolutional layer2: Another 20 channel 5x5x20 convolutional layer followed by a relu and a maxpool.</p>
+                <p>Convolutional layer3: A 40 channel 5x5x20 convolutional layer followed by a relu and a maxpool</p>
+                <p>layer4: a 60 channel 3x3x40 convolutional layer straight into the fully connected layers.</p>
+                <p>Fully connected layer 1: a 640x7560 matrix followed by a relu.</p>
+                <p>Fully connected layer 2: a 116x640 matrix.</p>
+                
+                <p>As we can see, instead of limiting my channel size to 12-28, I actually increased it to about 40 for the last two layers and got far better results. When I was experimenting with the 5-layered CNN with 12-28 channel sizes, my predictions tended to be more of an average of the facial poisitions.</p>
+
+            <h3>Training and Validation Accuracy </h3>
+                <img src="./results/pt_2/epoch_loss_decrease.png" height="400" width="500">
+            <h3>Visualization of weights! </h2>
+                <img src="./results/pt_2/19weight_visualization.png">
+            <h3>Examples of successes!</h3>
+                <img src="./results/pt_2/prediction_1_25.png" height="300" width="400">
+                <img src="./results/pt_2/prediction_17_25.png" height="300" width="400">
+                <img src="./results/pt_2/prediction_31_25.png" height="300" width="400">
+                <img src="./results/pt_2/prediction_38_25.png" height="300" width="400">
+                <img src="./results/pt_2/prediction_43_25.png" height="300" width="400">
+                <img src="./results/pt_2/prediction_15_25.png" height="300" width="400">
+            <h3>Examples of failures!</h3>
+                <img src="./results/pt_2/prediction_18_25.png" height="300" width="400">
+                <img src="./results/pt_2/prediction_7_25.png" height="300" width="400">
+                <img src="./results/pt_2/prediction_24_25.png" height="300" width="400">
+            <p>As seen above my model is able to account for faces that are rotated, but not so much faces where they face strongly in a single direction. As seen by the bottom examples, the model has trouble identifying the orientation of the face. </p>
+        <h3>Part 3 is coming! I just need to get my photos off of google colab but my internet is shaky.</h3>
 </body>
 </html>
