@@ -13,7 +13,7 @@
             <h3>Sample Images from Dataloader</h3>
                 <img src="./results/pt_1/pt1_dataloader.png">
             <h3>Training and Validation Accuracy </h3>
-                <p>Plotted below are the training and validation accuracy trend lines for a total of 25 epochs. Blue is the training loss & orange is the loss on testing data. </p>
+                <p>Plotted below are the training and validation accuracy trend lines for a total of 25 epochs with a learning rate of 1e-3 and batch size of 4. Blue is the training loss & orange is the loss on testing data. </p>
                 <img src="./results/pt_1/epoch_loss_decrease.png" height="400" width="500">
             <h3>Examples of successes!</h3>
                 <img src="./results/pt_1/prediction_30_25.png" height="300" width="400">
@@ -44,6 +44,7 @@
                 <p>As we can see, instead of limiting my channel size to 12-28, I actually increased it to about 40 for the last two layers and got far better results. When I was experimenting with the 5-layered CNN with 12-28 channel sizes, my predictions tended to be more of an average of the facial poisitions.</p>
 
             <h3>Training and Validation Accuracy </h3>
+                <p>Once again, using a learning rate of 1e-3 and batch size of 4.</p>
                 <img src="./results/pt_2/epoch_loss_decrease.png" height="400" width="500">
             <h3>Visualization of weights! </h2>
                 <img src="./results/pt_2/19weight_visualization.png">
@@ -59,6 +60,30 @@
                 <img src="./results/pt_2/prediction_7_25.png" height="300" width="400">
                 <img src="./results/pt_2/prediction_24_25.png" height="300" width="400">
             <p>As seen above my model is able to account for faces that are rotated, but not so much faces where they face strongly in a single direction. As seen by the bottom examples, the model has trouble identifying the orientation of the face. </p>
-        <h3>Part 3 is coming! I just need to get my photos off of google colab but my internet is shaky.</h3>
+        <h2>!!!!!! FOR GRADERS PLEASE CLICK THIS LINK FOR MY PT3 CODE !!!!!!!!!</h2>
+        <a href="https://colab.research.google.com/drive/19sZorks56CqRP2hOMPcvQbNZmsrFk_Jl?usp=sharing">here</a>
+        <h2>Part 3: Resnet18 trained on 6k images!</h2>
+            <h3>Training loss over 10 epochs</h3>
+                <p>Since there did not exist a validation dataset, I was not able to obtain a validation training loss line. Please ignore the orange line. And as above, my training rate was 1e-3 and the batch size I used was 4. </p>
+                <img src="./results/pt_3/training_loss.png">
+            <h3>Neural Architecture</h3>
+                <p>I opted to use <a href="https://arxiv.org/pdf/1512.03385.pdf">resnet18</a>, which is 18 layers deep and has the special property of adding the "residual" of the image between every layer. I changed the input channel size and output channel size to adhere to our specific data.</p>
+            <h3>Some examples of successes on the training data!</h3>
+                <img src="./results/pt_3/test_1.png" height="300" width="400">
+                <img src="./results/pt_3/test_2.png" height="300" width="400">
+                <img src="./results/pt_3/test_3.png" height="300" width="400">
+                <img src="./results/pt_3/test_4.png" height="300" width="400">
+            <h3>Examples of successes on me + the boiz</h3>
+                <img src="./results/pt_3/brian.png" height="300" width="400">
+                <img src="./results/pt_3/alvin.png" height="300" width="400">
+                <img src="./results/pt_3/chris.png" height="300" width="400">
+                <img src="./results/pt_3/john.png" height="300" width="400">
+                <img src="./results/pt_3/mike.png" height="300" width="400">
+                <img src="./results/pt_3/zzz.png" height="300" width="400">
+                <img src="./results/pt_3/cynthiaa.png" height="300" width="400">
+                <img src="./results/pt_3/claire.png" height="300" width="400">
+            <h3>Failures in goonzone</h3>
+                <img src="./results/pt_3/daniel.png" height="300" width="400">
+                <img src="./results/pt_3/shen.png" height="300" width="400">
 </body>
 </html>
