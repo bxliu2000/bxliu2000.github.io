@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="simple.css">
+    <title>Project Four</title>
+    <meta name="Brian Liu" content="SitePoint">
+</head>
+
+<body>
+    <h1>Fun with neural networks!</h1>
+        <h2>Part 1: Nose Detection</h2>
+            <h3>Sample Images from Dataloader</h3>
+                <img src="./results/pt_1/pt1_dataloader.png">
+            <h3>Training and Validation Accuracy </h3>
+                <p>Plotted below are the training and validation accuracy trend lines for a total of 25 epochs with a learning rate of 1e-3 and batch size of 4. Blue is the training loss & orange is the loss on testing data. </p>
+                <img src="./results/pt_1/epoch_loss_decrease.png" height="400" width="500">
+            <h3>Examples of successes!</h3>
+                <img src="./results/pt_1/prediction_30_25.png" height="300" width="400">
+                <img src="./results/pt_1/prediction_11_25.png" height="300" width="400">
+                <img src="./results/pt_1/prediction_15_25.png" height="300" width="400">
+                <img src="./results/pt_1/prediction_16_25.png" height="300" width="400">
+                <img src="./results/pt_1/prediction_34_25.png" height="300" width="400">
+                <img src="./results/pt_1/prediction_35_25.png" height="300" width="400">
+            <h3>Examples of failures!</h3>
+                <img src="./results/pt_1/prediction_23_25.png" height="300" width="400">
+                <img src="./results/pt_1/prediction_31_25.png" height="300" width="400">
+                <img src="./results/pt_1/prediction_36_25.png" height="300" width="400">
+            <h4>Why failure?</h4>
+            <p>If we take a closer look at the failure photos, we can see that our prediction is detecting a point where the pattern at that position resembles that of a nose. For example with the woman, the dimples in her smile create a similar pattern to that of a nose, and the last man's eyebags also has a similar pattern to that of a nose as well. Thus I believe that the filter in the first layer which is trained to recognize the pixel composition of a nose is mistaking these other features on the face for that of a nose. </p>
+        <h2>Part 2: Detecting the rest of the faces</h2>
+            <h3>Sample Images from Dataloader</h3>
+                <p>For Data Augmentation, I incorporated random changes in brightness, saturation, randomly cropping my image within a specified window, and randomly rotating it from -15 to 15 degrees. Below are some examples.</p>
+                <img src="./results/pt_2/pt_2_dataloader.png">
+            <h3>My Neural Architecture</h3>
+                <p>For task two I actually forewent the advice and stayed with 4 thicc convolutional layers instead of 5-6. After tons of experimentation, I got far better results with 4 layers and I hypothesizoe it is because my image size is still relatively small. I chose to pass in image sizes of 160x120. </p>
+                <p>Convolutional layer1: I had a 20 channel 5x5 convolutional layer followed by a relu and a maxpool.</p>
+                <p>Convolutional layer2: Another 20 channel 5x5x20 convolutional layer followed by a relu and a maxpool.</p>
+                <p>Convolutional layer3: A 40 channel 5x5x20 convolutional layer followed by a relu and a maxpool</p>
+                <p>layer4: a 60 channel 3x3x40 convolutional layer straight into the fully connected layers.</p>
+                <p>Fully connected layer 1: a 640x7560 matrix followed by a relu.</p>
+                <p>Fully connected layer 2: a 116x640 matrix.</p>
+                
+                <p>As we can see, instead of limiting my channel size to 12-28, I actually increased it to about 40 for the last two layers and got far better results. When I was experimenting with the 5-layered CNN with 12-28 channel sizes, my predictions tended to be more of an average of the facial poisitions.</p>
+
+            <h3>Training and Validation Accuracy </h3>
+                <p>Once again, using a learning rate of 1e-3 and batch size of 4.</p>
+                <img src="./results/pt_2/epoch_loss_decrease.png" height="400" width="500">
+            <h3>Visualization of weights! </h2>
+                <img src="./results/pt_2/19weight_visualization.png">
+            <h3>Examples of successes!</h3>
+                <img src="./results/pt_2/prediction_1_25.png" height="300" width="400">
+                <img src="./results/pt_2/prediction_17_25.png" height="300" width="400">
+                <img src="./results/pt_2/prediction_31_25.png" height="300" width="400">
+                <img src="./results/pt_2/prediction_38_25.png" height="300" width="400">
+                <img src="./results/pt_2/prediction_43_25.png" height="300" width="400">
+                <img src="./results/pt_2/prediction_15_25.png" height="300" width="400">
+            <h3>Examples of failures!</h3>
+                <img src="./results/pt_2/prediction_18_25.png" height="300" width="400">
+                <img src="./results/pt_2/prediction_7_25.png" height="300" width="400">
+                <img src="./results/pt_2/prediction_24_25.png" height="300" width="400">
+            <p>As seen above my model is able to account for faces that are rotated, but not so much faces where they face strongly in a single direction. As seen by the bottom examples, the model has trouble identifying the orientation of the face. </p>
+        <h2>!!!!!! FOR GRADERS PLEASE CLICK THIS LINK FOR MY PT3 CODE !!!!!!!!!</h2>
+        <a href="https://colab.research.google.com/drive/19sZorks56CqRP2hOMPcvQbNZmsrFk_Jl?usp=sharing">here</a>
+        <h2>Part 3: Resnet18 trained on 6k images!</h2>
+            <h3>Training loss over 10 epochs</h3>
+                <p>Since there did not exist a validation dataset, I was not able to obtain a validation training loss line. Please ignore the orange line. And as above, my training rate was 1e-3 and the batch size I used was 4. </p>
+                <img src="./results/pt_3/training_loss.png">
+            <h3>Neural Architecture</h3>
+                <p>I opted to use <a href="https://arxiv.org/pdf/1512.03385.pdf">resnet18</a>, which is 18 layers deep and has the special property of adding the "residual" of the image between every layer. I changed the input channel size and output channel size to adhere to our specific data.</p>
+            <h3>Some examples of successes on the training data!</h3>
+                <img src="./results/pt_3/test_1.png" height="300" width="400">
+                <img src="./results/pt_3/test_2.png" height="300" width="400">
+                <img src="./results/pt_3/test_3.png" height="300" width="400">
+                <img src="./results/pt_3/test_4.png" height="300" width="400">
+            <h3>Examples of successes on me + the boiz</h3>
+                <img src="./results/pt_3/brian.png" height="300" width="400">
+                <img src="./results/pt_3/alvin.png" height="300" width="400">
+                <img src="./results/pt_3/chris.png" height="300" width="400">
+                <img src="./results/pt_3/john.png" height="300" width="400">
+                <img src="./results/pt_3/mike.png" height="300" width="400">
+                <img src="./results/pt_3/zzz.png" height="300" width="400">
+                <img src="./results/pt_3/cynthiaa.png" height="300" width="400">
+                <img src="./results/pt_3/claire.png" height="300" width="400">
+            <h3>Failures in goonzone</h3>
+                <img src="./results/pt_3/daniel.png" height="300" width="400">
+                <img src="./results/pt_3/shen.png" height="300" width="400">
+</body>
+</html>

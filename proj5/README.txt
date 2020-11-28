@@ -1,0 +1,1 @@
+I have annotated every cell of my python notebook in Part B. Please refer to those when reading the code. I have also included my Part A code just in case. However, I basically copied all my Part A code into my Part B notebook, so if you are in a rush, just look through my part B. I believe it has everything that is needed for this submission.
