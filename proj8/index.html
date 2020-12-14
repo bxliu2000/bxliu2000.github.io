@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="simple.css">
+    <title>Project Seven: Poor Man's Augmented Reality</title>
+    <meta name="Brian Liu" content="SitePoint">
+</head>
+
+<body>
+    <h2>Poor Man's Augmented Reality. </h2>
+        <h3>Theory</h3>
+        <p>This project was super cool. I learned a lot about 3D coordinates and camera projection matrices that allow us to rotate, translate, and project our 3D view of our world onto a 2D plane. In this webpage, I attempt to explain some of the theory behind the magic. </p>
+
+        <p>First let's talk about the Camera Matrix. I found the slides from <a href="https://www.cs.cmu.edu/~16385/s17/Slides/11.1_Camera_matrix.pdf">here</a>. Essentially the important thing to know that it is an 3x4 matrix that takes coordinates in our 3D world into 2D coordinates in our image. Remember that we deal with homogeneous coordinates, hence the 3x4 matrix corresponds to (2+1) = 3 dimension for our 2D and (3+1) = 4 dimension for our 3D. Broadly speaking, we can think of it as x = PX, where x in R3 and X in R4, and P is our camera matrix.</p> 
+        <p>Something important to know is that we can decompose our matrix, P, into the P = K[R | t], where K is a 3x3 intrinsic matrix based on a pinhole camera model, R is a 3x3 matrix extrinsic corresponding to rotations in 3D space, t is a 3x1 vector extrinsic corresponding to translations in 3D space. Essentially, any point in the real 3D world can be rotated and translated to correspond with a point in our 3D coordinate system that has our camera as an origin. Then, we can follow the another matrix derived from properties of a pinhole camera to bring that point into our 2D plane.</p>
+        <p>According to <a href='https://en.wikipedia.org/wiki/Camera_matrix'>wikipedia</a>, the intrinsic matrix has 5 degrees of freedom, and we know that translation + rotation matrix has 3 degrees of freedom each => our P matrix has 11 degrees of freedom. </p>
+        <p>If we figure out P for every frame of a video sequence, we can specify any coordinate in 3D space and map them into our 2D image, hence giving the effect of AR. To figure out P, we need at least 6 points of correspondence between 3D space and our 2D image plane. I had way more than 6 points, because generally overconstrained least squares produces a more robust result. I used SVD decomposition to approximate the matrix P with help from this <a href="http://www.cim.mcgill.ca/~langer/558/19-cameracalibration.pdf">helpful guide.</a></p>
+
+        <h3>Corresponding points</h3>
+        <p>To find corresponding points between the 3D world and 2D image, I followed the advice of the assignment and made myself a paper box with grid lines drawn on them. This allowed me to automate generating points in 3D space using for loops (you can view this in my code). For the 2D points, I used matplotlib's ginput. It worked fine. Instead of mapping through every frame of the video, I decided to use one of OpenCV's built in trackers. It was also super interesting to figure out how those worked. MedianFlow Tracker also worked super well for me. I purposely put my box on a table with very different patterns in order for the tracker to gain better results. </p>
+        <img src="./label.gif" width="300">
+        <h3>Augment a Cube</h3>
+        <p>I defined a cube in 3D coordinate space, and drew it into the frame with OpenCV's line, rectangle functions. yay.</p>
+        <img src="./success_ar.gif"  width="300">
+</body>
+</html>
