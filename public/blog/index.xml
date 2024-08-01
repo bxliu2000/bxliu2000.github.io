@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on Eggy&#39;s Corner</title>
+    <link>http://localhost:1313/blog/</link>
+    <description>Recent content in Blogs on Eggy&#39;s Corner</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2024, Brian Liu.</copyright>
+    <lastBuildDate>Mon, 29 Jul 2024 21:31:22 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My First Post</title>
+      <link>http://localhost:1313/my-first-post/</link>
+      <pubDate>Mon, 29 Jul 2024 21:31:22 -0400</pubDate>
+      <guid>http://localhost:1313/my-first-post/</guid>
+      <description>Introduction this is bold text, and this is emphasized behavior. Visit the Hugo website!&#xA;Hello World! can I write something here?</description>
+    </item>
+  </channel>
+</rss>
