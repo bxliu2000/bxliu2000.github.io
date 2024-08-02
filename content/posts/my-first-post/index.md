@@ -1,7 +1,7 @@
 ---
 title: "Init"
 date: 2024-07-29T21:31:22-04:00
-draft: true
+draft: false
 type: "blog"
 ---
 
