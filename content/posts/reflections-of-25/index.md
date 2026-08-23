@@ -1,5 +1,5 @@
 ---
-title: "The Big Two Six"
+title: "The Big Two-Six"
 date: 2026-08-22T12:00:00-04:00
 draft: false
 type: "blog"
