@@ -9,6 +9,8 @@ I recently turned 26, and I want to live this year more intentionally than ever
 before. 25 was packed with challenging moments that gave rise to several
 oppoprtunities for personal growth. Here is what I want to work on.
 
+{{<sizeable_img src="IMG_1249.jpg" process_cmd="resize x550" caption="Winding Roads Ahead">}}
+
 ## Lower my Cortisol
 
 Having Shingles was a wake-up call that I'm too stressed out. Getting Shingles
